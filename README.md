@@ -69,7 +69,7 @@ HotList/
 
 #### 获取具体类型热榜数据
 - Method: **GET**
-- URL:  ``` https://www.printf520.com:8080/GetTypeInfo```
+- URL:  ```  https://www.printf520.com:8080/GetTypeInfo?id=2```
 - Param：id
 - Body:
 
