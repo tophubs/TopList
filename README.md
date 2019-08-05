@@ -72,6 +72,32 @@ HotList/
 - URL:  ```  https://www.printf520.com:8080/GetTypeInfo?id=2```
 - Param：id
 - Body:
+```
+{
+    "Code":0,
+    "Message":"获取成功",
+    "Data":[
+        {
+            "title":"
+45个经典面试回答提示，分享给即将工作的大家。 zt
+",
+            "url":"https://bbs.hupu.com//28814429.html"
+        },
+        {
+            "title":"
+[名场面]回家的诱惑：洪世贤酒店幽会，抵不住诱惑犯了错！ zt
+",
+            "url":"https://bbs.hupu.com//28818367.html"
+        },
+        {
+            "title":"
+张艺兴回应假唱风波。ZT
+",
+            "url":"https://bbs.hupu.com//28815609.html"
+        }
+    ]
+}
+```
 
 
 
