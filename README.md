@@ -47,4 +47,31 @@ HotList/
 └── README.md
 ```
 
+#### API说明
+
+#### 获取所有类型
+- Method: **GET**
+- URL:  ```https://www.printf520.com:8080/GetType```
+- Param：无
+- Body:
+```
+{
+    "Code":0,
+    "Message":"获取数据成功",
+    "Data":[
+        {"id":"1","sort":"63908","title":"知乎"},
+        {"id":"2","sort":"21912","title":"虎扑"},
+        {"id":"6","sort":"11707","title":"天涯"},
+        {"id":"7","sort":"12546","title":"知乎日报"},
+       ]}
+```
+
+
+#### 获取具体类型热榜数据
+- Method: **GET**
+- URL:  ``` https://www.printf520.com:8080/GetTypeInfo```
+- Param：id
+- Body:
+
+
 
