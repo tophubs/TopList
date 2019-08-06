@@ -81,11 +81,7 @@ func (MySql *MySql) Close() error {
 */
 func (MySql *MySql) Select(tableName string, field []string) *MySql {
 	var allField string
-	for _, x := range field {
-		allField += x + ","
-	}
-	// 删除所以字段最后一个,
-	allField = strings.TrimSuffix(allField, ",")
+	allField = strings.Join(field, ",")
 	MySql.fields = "select " + allField + " from " + tableName
 	MySql.tableName = tableName
 	return MySql
