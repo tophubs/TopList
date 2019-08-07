@@ -24,7 +24,7 @@ type HotData struct {
 	Data    interface{}
 }
 
-func SaveDataToJson(data interface{}, dataType string) string {
+func SaveDataToJson(data interface{}) string {
 	Message := HotData{}
 	Message.Code = 0
 	Message.Message = "获取成功"
