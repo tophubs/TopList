@@ -170,28 +170,28 @@ func GetAllData(dataType string) {
 	start := time.Now()
 	switch dataType {
 	case "V2EX":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetV2EX(), dataType)})
+		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetV2EX())})
 		group.Done()
 		seconds := time.Since(start).Seconds()
 		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
 		fmt.Println()
 		break
 	case "TieBa":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetTieBa(), dataType)})
+		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetTieBa())})
 		group.Done()
 		seconds := time.Since(start).Seconds()
 		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
 		fmt.Println()
 		break
 	case "ChouTi":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetChouTi(), dataType)})
+		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetChouTi())})
 		group.Done()
 		seconds := time.Since(start).Seconds()
 		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
 		fmt.Println()
 		break
 	case "ITHome":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetITHome(), dataType)})
+		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetITHome())})
 		group.Done()
 		seconds := time.Since(start).Seconds()
 		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
