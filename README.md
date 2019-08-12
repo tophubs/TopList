@@ -9,7 +9,7 @@
 1. 执行database.sql创建数据库,并配置/Config/Mysql.go数据库连接地址
 2. 执行/App/GetHot.go程序
 3. 打开hot.html今日热榜页面
-4. 部署定时任务
+4. 部署GetHot.sh定时Cron爬虫任务
 
 
 ### 目录说明
