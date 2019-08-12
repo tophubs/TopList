@@ -13,6 +13,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"reflect"
 	"strconv"
 	"sync"
 	"time"
@@ -22,6 +23,10 @@ type HotData struct {
 	Code    int
 	Message string
 	Data    interface{}
+}
+
+type Spider struct {
+	DataType string
 }
 
 func SaveDataToJson(data interface{}) string {
@@ -38,7 +43,7 @@ func SaveDataToJson(data interface{}) string {
 }
 
 // V2EX
-func GetV2EX() []map[string]interface{} {
+func (spider Spider) GetV2EX() []map[string]interface{} {
 	url := "https://www.v2ex.com/?tab=hot"
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -67,7 +72,8 @@ func GetV2EX() []map[string]interface{} {
 	return allData
 }
 
-func GetITHome() []map[string]interface{} {
+// IT之家
+func (spider Spider) GetITHome() []map[string]interface{} {
 	url := "https://www.ithome.com/"
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -96,10 +102,8 @@ func GetITHome() []map[string]interface{} {
 	return allData
 }
 
-
-
 // 贴吧
-func GetTieBa() []map[string]interface{} {
+func (spider Spider) GetTieBa() []map[string]interface{} {
 	url := "http://tieba.baidu.com/hottopic/browse/topicList"
 	res, err := http.Get(url)
 	if err != nil {
@@ -121,7 +125,8 @@ func GetTieBa() []map[string]interface{} {
 
 }
 
-func GetChouTi() []map[string]interface{} {
+// 抽屉
+func (spider Spider) GetChouTi() []map[string]interface{} {
 	url := "https://dig.chouti.com/top/24hr?_=" + strconv.FormatInt(time.Now().Unix(), 10) + "163"
 	url2 := "https://dig.chouti.com/link/hot?afterTime=" + strconv.FormatInt(time.Now().Unix(), 10) + "026000" + "&_=" + strconv.FormatInt(time.Now().Unix(), 10) + "667"
 	res, err := http.Get(url)
@@ -157,6 +162,9 @@ func GetChouTi() []map[string]interface{} {
 
 }
 
+/**
+部分热榜标题需要转码
+*/
 func GbkToUtf8(s []byte) ([]byte, error) {
 	reader := transform.NewReader(bytes.NewReader(s), simplifiedchinese.GBK.NewDecoder())
 	d, e := ioutil.ReadAll(reader)
@@ -166,40 +174,9 @@ func GbkToUtf8(s []byte) ([]byte, error) {
 	return d, nil
 }
 
-func GetAllData(dataType string) {
-	start := time.Now()
-	switch dataType {
-	case "V2EX":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetV2EX())})
-		group.Done()
-		seconds := time.Since(start).Seconds()
-		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
-		fmt.Println()
-		break
-	case "TieBa":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetTieBa())})
-		group.Done()
-		seconds := time.Since(start).Seconds()
-		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
-		fmt.Println()
-		break
-	case "ChouTi":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetChouTi())})
-		group.Done()
-		seconds := time.Since(start).Seconds()
-		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
-		fmt.Println()
-		break
-	case "ITHome":
-		Common.MySql{}.GetConn().Where(map[string]string{"dataType": dataType}).Update("hotData", map[string]string{"str": SaveDataToJson(GetITHome())})
-		group.Done()
-		seconds := time.Since(start).Seconds()
-		fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, dataType)
-		fmt.Println()
-		break
-	}
-}
-
+/**
+删除redis缓存
+*/
 func DeleteRedisCache() {
 	sql := "select id,name from hotData"
 	data := Common.MySql{}.GetConn().ExecSql(sql)
@@ -214,17 +191,34 @@ func DeleteRedisCache() {
 	}
 }
 
+/**
+执行每个分类数据
+*/
+func ExecGetData(spider Spider) {
+	reflectValue := reflect.ValueOf(spider)
+	dataType := reflectValue.MethodByName("Get" + spider.DataType)
+	data := dataType.Call(nil)
+	start := time.Now()
+	Common.MySql{}.GetConn().Where(map[string]string{"dataType": spider.DataType}).Update("hotData", map[string]string{"str": SaveDataToJson(data)})
+	group.Done()
+	seconds := time.Since(start).Seconds()
+	fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, spider.DataType)
+	fmt.Println()
+
+}
+
 var group sync.WaitGroup
 
 func main() {
-	allData := []string{"TieBa", "V2EX", "ChouTi", "ITHome",}
+	allData := []string{"TieBa", "V2EX", "ChouTi", "ITHome"}
 	fmt.Println("开始抓取" + strconv.Itoa(len(allData)) + "种数据类型")
 	group.Add(len(allData))
+	var spider Spider
 	for _, value := range allData {
 		fmt.Println("开始抓取" + value)
-		go GetAllData(value)
+		spider = Spider{DataType: value}
+		go ExecGetData(spider)
 	}
 	group.Wait()
-	DeleteRedisCache()
 	fmt.Print("完成抓取")
 }
