@@ -1,30 +1,18 @@
 # 今日热榜
 
-**今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:https://www.printf520.com/hot.html**
+**今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[https://www.printf520.com/hot.html][热榜]**
 ![DeepinScrot-4337.png](https://i.loli.net/2019/08/05/PjX2nqWAgM5xsL4.png)
 
-#### 安装教程
-
-1. git clone https://github.com/timeromantic/hotDataList.git
-2. 执行database.sql文件
-3. 配置/Config/Mysql.go数据库地址
-4. 执行/App/GetHot.go程序
-5. 修改hot.html并打开
-6. 部署定时任务
+### 安装教程
 
 
-#### 使用说明
+1. 执行database.sql创建数据库,并配置/Config/Mysql.go数据库连接地址
+2. 执行/App/GetHot.go程序
+3. 打开hot.html今日热榜页面
+4. 部署定时任务
 
-1. fork 项目
 
-#### 参与贡献
-
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-#### 目录说明
+### 目录说明
 
 ```
 HotList/
@@ -48,7 +36,7 @@ HotList/
 └── README.md
 ```
 
-#### API说明
+### API说明
 
 #### 获取所有类型
 - Method: **GET**
@@ -68,7 +56,7 @@ HotList/
 ```
 
 
-#### 获取具体类型热榜数据
+### 获取具体类型热榜数据
 - Method: **GET**
 - URL:  ```  https://www.printf520.com:8080/GetTypeInfo?id=2```
 - Param：id
@@ -101,4 +89,16 @@ HotList/
 ```
 
 
+### 使用说明
 
+1. fork 项目
+
+### 参与贡献
+
+1. Fork 本项目
+2. 新建 Feat_xxx 分支
+3. 提交代码
+4. 新建 Pull Request
+
+
+[热榜]: https://www.printf520.com/hot.html
