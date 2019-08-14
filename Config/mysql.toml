@@ -1,0 +1,2 @@
+Source = "root:Wg134106++@tcp(132.232.126.162:6666)/mine?charset=utf8mb4"
+Driver = "mysql"
