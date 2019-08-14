@@ -38,6 +38,7 @@ func init() {
 	MySql := MySql{}
 	var cfg MysqlCfg
 	if _, err := toml.DecodeFile("./Config/mysql.toml", &cfg); err != nil {
+		fmt.Println(222)
 		log.Fatal(err)
 	}
 	MySql.source = cfg.Source
