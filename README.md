@@ -7,32 +7,32 @@
 
 
 1. 执行database.sql创建数据库,并配置/Config/Mysql.go数据库连接地址
-2. 执行/App/GetHot.go程序
+2. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
 3. 打开hot.html今日热榜页面
-4. 部署GetHot.sh定时Cron爬虫任务
 
 
 ### 目录说明
 
 ```
-HotList/
+TopList/
 ├── App
-│   └── GetHot.go  爬虫主程序
+│   ├── GetHot.go   爬虫程序需要Cron定时任务执行
+│   └── Server.go   Server程序需要守护进程的方式执行
 ├── Common
-│   ├── Db.go      数据库组件
-│   └── Redis.go   redis组件
+│   ├── Db.go       DB组件
+│   └── Message.go  
 ├── Config
-│   ├── Config.go 
-│   └── Mysql.go   mysql配置文件
+│   ├── MySql.go    mysql配置读取组件
+│   └── mysql.toml  mysql配置文件需要手动配置
 ├── Cron
-│   └── GetHot.sh  爬虫定时脚本
-├── Exe
+│   ├── GetHot.sh   爬虫Cron程序可以是每小时执行一次
+│   └── README.md
+├── database.sql    数据库建表文件
 ├── Html
 │   ├── css
-│   ├── hot.html   热榜展示网页
+│   ├── hot.html    前端热榜展示网页
 │   └── js
-|
-└── database.sql
+│  
 └── README.md
 ```
 
