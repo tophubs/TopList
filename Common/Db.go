@@ -1,9 +1,9 @@
 package Common
 
 import (
+	"../Config"
 	"database/sql"
 	"fmt"
-	"github.com/BurntSushi/toml"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"math"
@@ -11,7 +11,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-	//"time"
 )
 
 var DbPool *sync.Pool
@@ -36,13 +35,8 @@ type MysqlCfg struct {
 // 初始化连接池
 func init() {
 	MySql := MySql{}
-	var cfg MysqlCfg
-	if _, err := toml.DecodeFile("./Config/mysql.toml", &cfg); err != nil {
-		fmt.Println(222)
-		log.Fatal(err)
-	}
-	MySql.source = cfg.Source
-	MySql.driver = cfg.Driver
+	MySql.source = Config.MySql().Source
+	MySql.driver = Config.MySql().Driver
 	db, err := sql.Open(MySql.driver, MySql.source)
 	db.SetMaxOpenConns(2000)             // 最大链接
 	db.SetMaxIdleConns(1000)             // 空闲连接，也就是连接池里面的数量
