@@ -36,7 +36,7 @@ func GetConfig(w http.ResponseWriter, r *http.Request) {
 }
 
 /**
-kill -SIGUSR1 PID
+kill -SIGUSR1 PID 可平滑重新读取mysql配置
 */
 func SyncMysqlCfg() {
 	s := make(chan os.Signal, 1)

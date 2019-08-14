@@ -3,7 +3,10 @@ package Config
 import (
 	"fmt"
 	"github.com/BurntSushi/toml"
+	"log"
+	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 )
 
@@ -24,8 +27,19 @@ func MySql() *MysqlCfg {
 	return cfg
 }
 
+func GetMySqlFilePath() string {
+	currentPath, err := os.Getwd()
+	if err != nil {
+		log.Fatal("获取目录失败")
+	}
+	if strings.HasSuffix(currentPath, "App") {
+		return strings.ReplaceAll(currentPath, "App", "Config") + "/mysql.toml"
+	}
+	return currentPath + "/Config/mysql.toml"
+}
+
 func ReloadConfig() {
-	filePath, err := filepath.Abs("./Config/mysql.toml")
+	filePath, err := filepath.Abs(GetMySqlFilePath())
 	if err != nil {
 		panic(err)
 	}
