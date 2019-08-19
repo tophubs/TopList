@@ -1,14 +1,16 @@
 package main
 
 import (
-	"../Common"
-	"../Config"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"regexp"
 	"syscall"
+
+	"../Common"
+	"../Config"
 )
 
 func GetTypeInfo(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +19,9 @@ func GetTypeInfo(w http.ResponseWriter, r *http.Request) {
 		log.Fatal("系统错误" + err.Error())
 	}
 	id := r.Form.Get("id")
-	sql := "select str from hotData where id=" + id
+	re := regexp.MustCompile("[0-9]+")
+	id = re.FindString(id)
+	sql := "select str from hotData2 where id=" + id
 	data := Common.MySql{}.GetConn().ExecSql(sql)
 	if len(data) == 0 {
 		fmt.Fprintf(w, "%s", `{"Code":1,"Message":"id错误，无该分类数据","Data":[]}`)
