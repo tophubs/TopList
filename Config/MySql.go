@@ -11,7 +11,7 @@ import (
 )
 
 type MysqlCfg struct {
-	Source, Driver string
+	Host, Port, User, Password, Database string
 }
 
 var (

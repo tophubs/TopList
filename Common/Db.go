@@ -29,14 +29,14 @@ type MySql struct {
 }
 
 type MysqlCfg struct {
-	Source, Driver string
+	Host, Port, User, Password, Database string
 }
 
 // 初始化连接池
 func init() {
 	MySql := MySql{}
-	MySql.source = Config.MySql().Source
-	MySql.driver = Config.MySql().Driver
+	MySql.source = Config.MySql().User + ":" + Config.MySql().Password + "@tcp(" + Config.MySql().Host + ":" + Config.MySql().Port + ")/" + Config.MySql().Database + "?charset=utf8mb4"
+	MySql.driver = "mysql"
 	db, err := sql.Open(MySql.driver, MySql.source)
 	db.SetMaxOpenConns(2000)             // 最大链接
 	db.SetMaxIdleConns(1000)             // 空闲连接，也就是连接池里面的数量

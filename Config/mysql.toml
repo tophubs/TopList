@@ -1,2 +1,5 @@
-Source = "user:password@tcp(ip:port)/database?charset=utf8mb4"
-Driver = "mysql"
+Host     = ""
+Port     = ""
+User     = ""
+Password = ""
+Database = ""
