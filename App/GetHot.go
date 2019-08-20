@@ -3,10 +3,13 @@ package main
 import (
 	"../Common"
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/bitly/go-simplejson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
 	"io"
@@ -1365,6 +1368,7 @@ func ExecGetData(spider Spider) {
 	data := dataType.Call(nil)
 	originData := data[0].Interface().([]map[string]interface{})
 	start := time.Now()
+	SaveDataToMangoDb(spider, originData)
 	Common.MySql{}.GetConn().Where(map[string]string{"dataType": spider.DataType}).Update("hotData2", map[string]string{"str": SaveDataToJson(originData)})
 	group.Done()
 	seconds := time.Since(start).Seconds()
@@ -1373,36 +1377,78 @@ func ExecGetData(spider Spider) {
 
 }
 
+type One struct {
+	Title, Url, Desc, CreateTime string
+}
+
+func SaveDataToMangoDb(spider Spider, Data []map[string]interface{}) {
+	if len(Data) == 0 {
+		return
+	}
+	// Set client options
+	clientOptions := options.Client().ApplyURI("mongodb://IP:Port")
+
+	// Connect to MongoDB
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Check the connection
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Get a handle for your collection
+	collection := client.Database("SiteData").Collection(spider.DataType)
+
+	var Temp One
+	var desc string = ""
+	for _, value := range Data {
+		if _, ok := value["desc"]; ok {
+			desc = value["desc"].(string)
+		}
+		Temp = One{Title: value["title"].(string), Url: value["url"].(string), Desc: desc, CreateTime: strconv.FormatInt(time.Now().Unix(), 10)}
+		fmt.Println(Temp)
+		collection.InsertOne(context.TODO(), Temp)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+}
+
 var group sync.WaitGroup
 
 func main() {
 	allData := []string{
-		"V2EX",
-		"ZhiHu",
-		"WeiBo",
-		"TieBa",
-		"DouBan",
-		"TianYa",
-		"HuPu",
-		"GitHub",
-		"BaiDu",
-		"36Kr",
-		"QDaily",
-		"GuoKr",
-		"HuXiu",
-		"ZHDaily",
-		"Segmentfault",
-		"WYNews",
-		"WaterAndWood",
-		"HacPai",
-		"KD",
-		"NGA",
-		"WeiXin",
+		//"V2EX",
+		//"ZhiHu",
+		//"WeiBo",
+		//"TieBa",
+		//"DouBan",
+		//"TianYa",
+		//"HuPu",
+		//"GitHub",
+		//"BaiDu",
+		//"36Kr",
+		//"QDaily",
+		//"GuoKr",
+		//"HuXiu",
+		//"ZHDaily",
+		//"Segmentfault",
+		//"WYNews",
+		//"WaterAndWood",
+		//"HacPai",
+		//"KD",
+		//"NGA",
+		//"WeiXin",
 		"Mop",
-		"Chiphell",
-		"JianDan",
-		"ChouTi",
-		"ITHome",
+		//"Chiphell",
+		//"JianDan",
+		//"ChouTi",
+		//"ITHome",
 	}
 	fmt.Println("开始抓取" + strconv.Itoa(len(allData)) + "种数据类型")
 	group.Add(len(allData))
