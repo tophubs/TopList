@@ -37,7 +37,7 @@ func SaveDataToJson(data interface{}) string {
 	Message.Data = data
 	jsonStr, err := json.Marshal(Message)
 	if err != nil {
-		log.Fatal("序列号json错误")
+		log.Fatal("序列化json错误")
 	}
 	return string(jsonStr)
 
