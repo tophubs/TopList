@@ -19,7 +19,7 @@ func (Message Message) Success(message string, data interface{}, w http.Response
 	Message.Data = data
 	jsonStr, err := json.Marshal(Message)
 	if err != nil {
-		log.Fatal("序列号json错误")
+		log.Fatal("序列化json错误")
 	}
 	fmt.Fprintf(w, "%s", string(jsonStr))
 }
@@ -30,7 +30,7 @@ func (Message Message) Error(message string, data interface{}, w http.ResponseWr
 	Message.Data = data
 	jsonStr, err := json.Marshal(Message)
 	if err != nil {
-		log.Fatal("序列号json错误")
+		log.Fatal("序列化json错误")
 	}
 	fmt.Fprintf(w, "%s", string(jsonStr))
 }
