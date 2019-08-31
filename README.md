@@ -9,9 +9,36 @@
 ### 安装教程
 
 
-1. 执行database.sql创建数据库,并配置/Config/Mysql.go数据库连接地址
-2. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
-3. 打开hot.html今日热榜页面
+1. 编译
+
+   ```
+   cd {root_path} # 项目根目录
+   go build -o ./App/GetHot App/GetHot.go
+   go build -o ./App/Server App/Server.go 
+   ```
+
+2. 执行database.sql创建数据库，更改配置文件`Config/mysql.toml`
+
+
+
+3. 编辑文件 `Html/js/blog/globalConfig.js`
+
+   ```
+   const ServerIp = 'http://{your_domain}:9090' // 替换成服务器域名
+   ```
+
+4. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
+
+   ```
+   crontab -e # 添加一行 0 */1 * * * {root_path}/App/GetHot
+   {root_path}/App/Server &
+   ```
+
+5. 测试
+
+   - 打开`http://{yourdomain}:9090/` 即可访问今日热榜
+
+   
 
 
 ### 目录说明
