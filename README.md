@@ -16,10 +16,8 @@
    go build -o ./App/GetHot App/GetHot.go
    go build -o ./App/Server App/Server.go 
    ```
-
+   
 2. 执行database.sql创建数据库，更改配置文件`Config/mysql.toml`
-
-
 
 3. 编辑文件 `Html/js/blog/globalConfig.js`
 
@@ -38,7 +36,6 @@
 
    - 打开`http://{yourdomain}:9090/` 即可访问今日热榜
 
-   
 
 
 ### 目录说明
