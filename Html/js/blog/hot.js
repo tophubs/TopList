@@ -23,12 +23,12 @@ function getHotInfo() {
             if (data['code']!=0 && data['Code'] != 0){
                 alert("获取失败")
             }else {
-                    if (data['Data'] !== undefined) {
-                        console.log(data.Data.sort((a,b)=>b.sort-a.sort))
-                        setBar(data['Data'])
-                    } else {
-                        setBar(data['data'])
-                    }
+                if (data['Data'] !== undefined) {
+                    console.log(data.Data.sort((a,b)=>b.sort-a.sort))
+                    setBar(data['Data'])
+                } else {
+                    setBar(data['data'])
+                }
             }
         },
         error:function () {
@@ -44,13 +44,13 @@ function setBar(object) {
     var isAllShow = localStorage.getItem("isAllShow")
     for (var i in object) {
         if (i > 13 && (isAllShow == "no" || isAllShow == undefined)) {
-            code += '<li role="presentation"><a style="display: none" hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].title+'</a></li>';
+            code += '<li role="presentation"><a style="display: none" hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].name+'</a></li>';
         } else {
             $("#iconAllShow").attr("class","glyphicon glyphicon-minus")
             if (i == 0) {
-                code += '<li class="active"  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].title+'</a></li>';
+                code += '<li class="active"  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].name+'</a></li>';
             } else {
-                code += '<li  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].title+'</a></li>';
+                code += '<li  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].name+'</a></li>';
             }
 
 
