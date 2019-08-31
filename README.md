@@ -29,14 +29,12 @@
 
    ```
    crontab -e # 添加一行 0 */1 * * * {root_path}/App/GetHot
-   {root_path}/App/Server &
+   nohup {root_path}/App/Server &
    ```
 
 5. 测试
 
    - 打开`http://{yourdomain}:9090/` 即可访问今日热榜
-
-
 
 ### 目录说明
 
