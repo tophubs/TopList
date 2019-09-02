@@ -8,11 +8,10 @@
 
 ### 安装教程
 
-
-1. 执行database.sql创建数据库,并配置/Config/Mysql.go数据库连接地址
-2. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
-3. 打开hot.html今日热榜页面
-
+1. 创建数据库，如 `news`
+2. 导入 `database.sql` 初始化脚本并配置 `/Config/Mysql.go` 数据库连接
+3. 部署定时任务 `/App/GetHot.go` 爬虫程序，且以守护进程的方式执行 `/App/Server.go`
+4. 打开 `hot.html` 今日热榜页面
 
 ### 目录说明
 
