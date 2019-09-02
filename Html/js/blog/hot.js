@@ -23,12 +23,12 @@ function getHotInfo() {
             if (data['code']!=0 && data['Code'] != 0){
                 alert("获取失败")
             }else {
-                    if (data['Data'] !== undefined) {
-                        console.log(data.Data.sort((a,b)=>b.sort-a.sort))
-                        setBar(data['Data'])
-                    } else {
-                        setBar(data['data'])
-                    }
+                if (data['Data'] !== undefined) {
+                    console.log(data.Data.sort((a,b)=>b.sort-a.sort))
+                    setBar(data['Data'])
+                } else {
+                    setBar(data['data'])
+                }
             }
         },
         error:function () {
