@@ -44,13 +44,13 @@ function setBar(object) {
     var isAllShow = localStorage.getItem("isAllShow")
     for (var i in object) {
         if (i > 13 && (isAllShow == "no" || isAllShow == undefined)) {
-            code += '<li role="presentation"><a style="display: none" hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].title+'</a></li>';
+            code += '<li role="presentation"><a style="display: none" hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].name+'</a></li>';
         } else {
             $("#iconAllShow").attr("class","glyphicon glyphicon-minus")
             if (i == 0) {
-                code += '<li class="active"  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].title+'</a></li>';
+                code += '<li class="active"  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].name+'</a></li>';
             } else {
-                code += '<li  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].title+'</a></li>';
+                code += '<li  role="presentation"><a hreflang="'+object.length+'" rel="'+i+'" type="'+object[i].id+'" onclick="getOwnInfo(this)" href="#'+object[i].id+'" aria-controls="profile" role="tab" data-toggle="tab">'+object[i].name+'</a></li>';
             }
 
 
