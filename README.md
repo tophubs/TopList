@@ -1,14 +1,39 @@
 # 今日热榜
 
+[![Build Status](https://travis-ci.com/async-rs/async-std.svg?branch=master)](https://github.com/tophubs/TopList/)
+[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/tophubs/TopList/)
+
 **今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[https://www.printf520.com/hot.html][热榜]**
 ![DeepinScrot-4337.png](https://i.loli.net/2019/08/05/PjX2nqWAgM5xsL4.png)
 
 ### 安装教程
 
+1. 编译
 
-1. 执行database.sql创建数据库,并配置/Config/Mysql.go数据库连接地址
-2. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
-3. 打开hot.html今日热榜页面
+   ```
+   cd {root_path} # 项目根目录
+   go build -o ./App/GetHot App/GetHot.go
+   go build -o ./App/Server App/Server.go 
+   ```
+   
+2. 创建数据库，如 `news`，执行database.sql创建表，更改配置文件`Config/mysql.toml`
+
+3. 编辑文件 `Html/js/blog/globalConfig.js`
+
+   ```
+   const ServerIp = 'http://{your_domain}:9090' // 替换成服务器域名
+   ```
+
+4. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
+
+   ```
+   crontab -e # 添加一行 0 */1 * * * {root_path}/App/GetHot
+   nohup {root_path}/App/Server &
+   ```
+
+5. 测试
+
+   - 打开`http://{yourdomain}:9090/` 即可访问今日热榜
 
 
 ### 目录说明

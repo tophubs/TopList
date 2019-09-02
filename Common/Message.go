@@ -17,7 +17,7 @@ func (Message Message) Success(message string, data interface{}) []byte {
 	Message.Data = data
 	jsonBytes, err := json.Marshal(Message)
 	if err != nil {
-		log.Fatal("序列号json错误")
+		log.Fatal("序列化json错误")
 	}
 	return jsonBytes
 }
@@ -28,7 +28,7 @@ func (Message Message) Error(message string, data interface{}) []byte {
 	Message.Data = data
 	jsonBytes, err := json.Marshal(Message)
 	if err != nil {
-		log.Fatal("序列号json错误")
+		log.Fatal("序列化json错误")
 	}
 	return jsonBytes
 }

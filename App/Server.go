@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"text/template"
 	"time"
 
 	"../Common"
@@ -67,6 +68,7 @@ func GetTypeInfo(w http.ResponseWriter, r *http.Request) {
 	}
 	cacheRW.RUnlock()
 	w.Write(rsp)
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 }
 
 func GetType(w http.ResponseWriter, r *http.Request) {
@@ -76,10 +78,11 @@ func GetType(w http.ResponseWriter, r *http.Request) {
 	copy(rsp, typeStorage)
 	cacheRW.RUnlock()
 	w.Write(rsp)
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 }
 
 func GetConfig(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, "%s", Config.MySql().Source)
 }
 
@@ -103,7 +106,21 @@ func main() {
 	http.HandleFunc("/GetTypeInfo", GetTypeInfo) // 设置访问的路由
 	http.HandleFunc("/GetType", GetType)         // 设置访问的路由
 	http.HandleFunc("/GetConfig", GetConfig)     // 设置访问的路由
-	err := http.ListenAndServe(":9090", nil)     // 设置监听的端口
+
+	// 静态资源
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("../Html/css/"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("../Html/js/"))))
+
+	// 首页
+	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+		t, err := template.ParseFiles("../Html/hot.html")
+		if err != nil {
+			log.Println("err")
+		}
+		t.Execute(res, nil)
+	})
+
+	err := http.ListenAndServe(":9090", nil) // 设置监听的端口
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
