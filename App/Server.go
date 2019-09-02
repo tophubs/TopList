@@ -82,6 +82,7 @@ func GetType(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetConfig(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
 	w.Header().Add("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, "%s", Config.MySql().Source)
 }
