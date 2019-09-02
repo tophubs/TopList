@@ -8,7 +8,6 @@
 
 ### 安装教程
 
-
 1. 编译
 
    ```
@@ -17,7 +16,7 @@
    go build -o ./App/Server App/Server.go 
    ```
    
-2. 执行database.sql创建数据库，更改配置文件`Config/mysql.toml`
+2. 创建数据库，如 `news`，执行database.sql创建表，更改配置文件`Config/mysql.toml`
 
 3. 编辑文件 `Html/js/blog/globalConfig.js`
 
@@ -35,6 +34,7 @@
 5. 测试
 
    - 打开`http://{yourdomain}:9090/` 即可访问今日热榜
+
 
 ### 目录说明
 

@@ -21,6 +21,7 @@ func (Message Message) Success(message string, data interface{}, w http.Response
 	if err != nil {
 		log.Fatal("序列化json错误")
 	}
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, "%s", string(jsonStr))
 }
 

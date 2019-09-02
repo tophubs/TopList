@@ -28,6 +28,7 @@ func GetTypeInfo(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "%s", `{"Code":1,"Message":"id错误，无该分类数据","Data":[]}`)
 		return
 	}
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, "%s", data[0]["str"])
 }
 
@@ -37,6 +38,7 @@ func GetType(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetConfig(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, "%s", Config.MySql().Source)
 }
 
