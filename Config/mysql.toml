@@ -1,2 +1,2 @@
-Source = "user:password@tcp(ip:port)/database?charset=utf8mb4"
+Source = "root:root@tcp(10.199.147.51:3309)/lgy_top_list?charset=utf8mb4"
 Driver = "mysql"

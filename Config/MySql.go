@@ -33,7 +33,7 @@ func GetMySqlFilePath() string {
 		log.Fatal("获取目录失败")
 	}
 	if strings.HasSuffix(currentPath, "App") {
-		return strings.ReplaceAll(currentPath, "App", "Config") + "/mysql.toml"
+		return strings.Replace(currentPath, "App", "Config", 0) + "/mysql.toml"
 	}
 	return currentPath + "/Config/mysql.toml"
 }

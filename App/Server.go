@@ -1,17 +1,17 @@
 package main
 
 import (
+	"../Common"
+	"../Config"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
+	"path/filepath"
+	// "os/signal"
 	"regexp"
-	"syscall"
+	// "syscall"
 	"text/template"
-
-	"../Common"
-	"../Config"
 )
 
 func GetTypeInfo(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +47,7 @@ kill -SIGUSR1 PID 可平滑重新读取mysql配置
 */
 func SyncMysqlCfg() {
 	s := make(chan os.Signal, 1)
-	signal.Notify(s, syscall.SIGUSR1)
+	// signal.Notify(s, syscall.SIGUSR1)
 	go func() {
 		for {
 			<-s
@@ -63,13 +63,17 @@ func main() {
 	http.HandleFunc("/GetType", GetType)         // 设置访问的路由
 	http.HandleFunc("/GetConfig", GetConfig)     // 设置访问的路由
 
+	dir, _ := filepath.Abs(`.`)
+
 	// 静态资源
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("../Html/css/"))))
-	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("../Html/js/"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir(dir+"/Html/css/"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir(dir+"/Html/js/"))))
 
 	// 首页
 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		t, err := template.ParseFiles("../Html/hot.html")
+		dir, _ := filepath.Abs(`.`)
+		t, err := template.ParseFiles(dir + "/Html/hot.html")
+		println(dir)
 		if err != nil {
 			log.Println("err")
 		}

@@ -46,7 +46,7 @@ func SaveDataToJson(data interface{}) string {
 // V2EX
 func (spider Spider) GetV2EX() []map[string]interface{} {
 	url := "https://www.v2ex.com/?tab=hot"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -81,7 +81,7 @@ func (spider Spider) GetV2EX() []map[string]interface{} {
 
 func (spider Spider) GetITHome() []map[string]interface{} {
 	url := "https://www.ithome.com/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -116,7 +116,7 @@ func (spider Spider) GetITHome() []map[string]interface{} {
 
 // 知乎
 func (spider Spider) GetZhiHu() []map[string]interface{} {
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -155,7 +155,7 @@ func (spider Spider) GetZhiHu() []map[string]interface{} {
 // 微博
 func (spider Spider) GetWeiBo() []map[string]interface{} {
 	url := "https://s.weibo.com/top/summary"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -222,7 +222,7 @@ func (spider Spider) GetTieBa() []map[string]interface{} {
 // 豆瓣
 func (spider Spider) GetDouBan() []map[string]interface{} {
 	url := "https://www.douban.com/group/explore"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -264,7 +264,7 @@ func (spider Spider) GetDouBan() []map[string]interface{} {
 // 天涯
 func (spider Spider) GetTianYa() []map[string]interface{} {
 	url := "http://bbs.tianya.cn/list.jsp?item=funinfo&grade=3&order=1"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -307,7 +307,7 @@ func (spider Spider) GetTianYa() []map[string]interface{} {
 // 虎扑
 func (spider Spider) GetHuPu() []map[string]interface{} {
 	url := "https://bbs.hupu.com/all-gambia"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -350,7 +350,7 @@ func (spider Spider) GetHuPu() []map[string]interface{} {
 // Github
 func (spider Spider) GetGitHub() []map[string]interface{} {
 	url := "https://github.com/trending"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -393,7 +393,7 @@ func (spider Spider) GetGitHub() []map[string]interface{} {
 
 func (spider Spider) GetBaiDu() []map[string]interface{} {
 	url := "http://top.baidu.com/buzz?b=341&c=513&fr=topbuzz_b1"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -434,7 +434,7 @@ func (spider Spider) GetBaiDu() []map[string]interface{} {
 
 func (spider Spider) Get36Kr() []map[string]interface{} {
 	url := "https://36kr.com/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -485,7 +485,7 @@ func (spider Spider) Get36Kr() []map[string]interface{} {
 
 func (spider Spider) GetQDaily() []map[string]interface{} {
 	url := "https://www.qdaily.com/tags/29.html"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -529,7 +529,7 @@ func (spider Spider) GetQDaily() []map[string]interface{} {
 
 func (spider Spider) GetGuoKr() []map[string]interface{} {
 	url := "https://www.guokr.com/scientific/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -573,7 +573,7 @@ func (spider Spider) GetGuoKr() []map[string]interface{} {
 
 func (spider Spider) GetHuXiu() []map[string]interface{} {
 	url := "https://www.huxiu.com/article"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -627,7 +627,7 @@ func (spider Spider) GetHuXiu() []map[string]interface{} {
 
 func (spider Spider) GetDBMovie() []map[string]interface{} {
 	url := "https://movie.douban.com/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -667,7 +667,7 @@ func (spider Spider) GetDBMovie() []map[string]interface{} {
 
 func (spider Spider) GetZHDaily() []map[string]interface{} {
 	url := "http://daily.zhihu.com/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -709,7 +709,7 @@ func (spider Spider) GetZHDaily() []map[string]interface{} {
 
 func (spider Spider) GetSegmentfault() []map[string]interface{} {
 	url := "https://segmentfault.com/hottest"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -751,7 +751,7 @@ func (spider Spider) GetSegmentfault() []map[string]interface{} {
 
 func (spider Spider) GetHacPai() []map[string]interface{} {
 	url := "https://hacpai.com/domain/play"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -793,7 +793,7 @@ func (spider Spider) GetHacPai() []map[string]interface{} {
 
 func (spider Spider) GetWYNews() []map[string]interface{} {
 	url := "http://news.163.com/special/0001386F/rank_whole.html"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -837,7 +837,7 @@ func (spider Spider) GetWYNews() []map[string]interface{} {
 
 func (spider Spider) GetWaterAndWood() []map[string]interface{} {
 	url := "https://www.newsmth.net/nForum/mainpage?ajax"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -899,7 +899,7 @@ func (spider Spider) GetWaterAndWood() []map[string]interface{} {
 
 func (spider Spider) GetNGA() []map[string]interface{} {
 	url := "http://nga.cn/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -943,7 +943,7 @@ func (spider Spider) GetNGA() []map[string]interface{} {
 
 func (spider Spider) GetCSDN() []map[string]interface{} {
 	url := "https://www.csdn.net/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -988,7 +988,7 @@ func (spider Spider) GetCSDN() []map[string]interface{} {
 // https://weixin.sogou.com/?pid=sogou-wsse-721e049e9903c3a7&kw=
 func (spider Spider) GetWeiXin() []map[string]interface{} {
 	url := "https://weixin.sogou.com/?pid=sogou-wsse-721e049e9903c3a7&kw="
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -1034,7 +1034,7 @@ func (spider Spider) GetWeiXin() []map[string]interface{} {
 
 func (spider Spider) GetKD() []map[string]interface{} {
 	url := "http://www.kdnet.net/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -1080,7 +1080,7 @@ func (spider Spider) GetKD() []map[string]interface{} {
 
 func (spider Spider) GetMop() []map[string]interface{} {
 	url := "http://www.mop.com/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -1138,7 +1138,7 @@ func (spider Spider) GetMop() []map[string]interface{} {
 
 func (spider Spider) GetChiphell() []map[string]interface{} {
 	url := "https://www.chiphell.com/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
@@ -1262,7 +1262,7 @@ func (spider Spider) GetChiphell() []map[string]interface{} {
 
 func (spider Spider) GetJianDan() []map[string]interface{} {
 	url := "http://jandan.net/"
-	timeout := time.Duration(5 * time.Second) //超时时间5s
+	timeout := time.Duration(50 * time.Second) //超时时间5s
 	client := &http.Client{
 		Timeout: timeout,
 	}
