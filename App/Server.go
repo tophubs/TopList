@@ -4,10 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"os/signal"
 	"regexp"
-	"syscall"
 	"text/template"
 
 	"../Common"
@@ -45,20 +42,20 @@ func GetConfig(w http.ResponseWriter, r *http.Request) {
 /**
 kill -SIGUSR1 PID 可平滑重新读取mysql配置
 */
-func SyncMysqlCfg() {
-	s := make(chan os.Signal, 1)
-	signal.Notify(s, syscall.SIGUSR1)
-	go func() {
-		for {
-			<-s
-			Config.ReloadConfig()
-			log.Println("Reloaded config")
-		}
-	}()
-}
+//func SyncMysqlCfg() {
+//	s := make(chan os.Signal, 1)
+//	signal.Notify(s, syscall.SIGUSR1)
+//	go func() {
+//		for {
+//			<-s
+//			Config.ReloadConfig()
+//			log.Println("Reloaded config")
+//		}
+//	}()
+//}
 
 func main() {
-	SyncMysqlCfg()
+	//SyncMysqlCfg()
 	http.HandleFunc("/GetTypeInfo", GetTypeInfo) // 设置访问的路由
 	http.HandleFunc("/GetType", GetType)         // 设置访问的路由
 	http.HandleFunc("/GetConfig", GetConfig)     // 设置访问的路由
