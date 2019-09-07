@@ -32,7 +32,7 @@ CREATE TABLE `hotData2` (
   PRIMARY KEY (`id`),
   KEY `hotData2__index_key` (`dataType`),
   KEY `hotData2__index_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
