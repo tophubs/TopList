@@ -6,59 +6,53 @@
 **今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[https://www.printf520.com/hot.html][热榜]**
 ![DeepinScrot-4337.png](https://i.loli.net/2019/08/05/PjX2nqWAgM5xsL4.png)
 
-### 安装教程
+### 开发教程
 
-1. 编译
+1. 将 `/your/path/to/TopList/src` 添加到 $GOPATH
+2. `cd {root_path}` # 项目根目录
+3. `cp docker/dev/default.env docker/dev/.env` # 复制docker-compose环境文件
+4. `make dep` # 安装依赖包
+5. `make dev` # 启动。会根据database.sql自动创建数据库，同时使用 (AIR)[https://github.com/cosmtrek/air], 不需要重启即可热重载
+6. 等待服务启动完毕，打开`http://{yourdomain}:{DEV_PORT}/` 即可访问今日热榜
 
-   ```
-   cd {root_path} # 项目根目录
-   go build -o ./App/GetHot App/GetHot.go
-   go build -o ./App/Server App/Server.go 
-   ```
-   
-2. 创建数据库，如 `news`，执行database.sql创建表，更改配置文件`Config/mysql.toml`
-
-3. 编辑文件 `Html/js/blog/globalConfig.js`
-
-   ```
-   const ServerIp = 'http://{your_domain}:9090' // 替换成服务器域名
-   ```
-
-4. 部署定时任务/App/GetHot.go爬虫程序，且以守护进程的方式执行Server.go
-
-   ```
-   crontab -e # 添加一行 0 */1 * * * {root_path}/App/GetHot
-   nohup {root_path}/App/Server &
-   ```
-
-5. 测试
-
-   - 打开`http://{yourdomain}:9090/` 即可访问今日热榜
-
+### 编译教程
+```
+cd {root_path} # 项目根目录
+go build -o ./App/GetHot App/GetHot.go
+go build -o ./App/Server App/Server.go
+```
 
 ### 目录说明
 
 ```
 TopList/
-├── App
-│   ├── GetHot.go   爬虫程序需要Cron定时任务执行
-│   └── Server.go   Server程序需要守护进程的方式执行
-├── Common
-│   ├── Db.go       DB组件
-│   └── Message.go  
-├── Config
-│   ├── MySql.go    mysql配置读取组件
-│   └── mysql.toml  mysql配置文件需要手动配置
-├── Cron
-│   ├── GetHot.sh   爬虫Cron程序可以是每小时执行一次
-│   └── README.md
-├── database.sql    数据库建表文件
-├── Html
-│   ├── css
-│   ├── hot.html    前端热榜展示网页
-│   └── js
-│  
-└── README.md
+├── docker
+│   └── dev
+│       ├── air                 # air 的可执行文件
+│       ├── air-gethot.conf     # GetHot 的 air 热加载配置
+│       ├── air-server.conf     # Server 的 air 热加载配置
+│       ├── default.env         # docker-compose 默认的环境变量
+│       └── docker-compose.yaml # docker-compose 配置文件
+└── src
+    └── app
+        ├── App
+        │   ├── GetHot.go     爬虫程序需要Cron定时任务执行
+        │   └── Server.go     Server程序需要守护进程的方式执行
+        ├── Common
+        │   ├── Db.go         DB组件
+        │   ├── Message.go
+        │   └── database.sql  数据库建表文件
+        ├── Config
+        │   ├── MySql.go      mysql配置读取组件
+        │   └── mysql.toml    mysql配置文件需要手动配置
+        ├── Cron
+        │   ├── GetHot.sh     爬虫Cron程序可以是每小时执行一次
+        │   └── README.md
+        ├── Html
+        │   ├── css
+        │   ├── hot.html      前端热榜展示网页
+        │   └── js
+        └── README.md
 ```
 
 ### API说明
