@@ -22,7 +22,7 @@ dep:
 gomod:
 	docker run --rm \
 		-v $(PWD)/src/app:/go/src/app \
-		-v /tmp/golang-dep:/go/pkg/mod \
+		-v /tmp/golang-mod:/go/pkg/mod \
 		-w /go/src/app \
 		-e GOPROXY=https://goproxy.cn \
 		-ti docker.io/library/golang:1.13.0-buster \
