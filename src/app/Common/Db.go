@@ -1,7 +1,7 @@
 package Common
 
 import (
-	"../Config"
+	"app/Config"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"

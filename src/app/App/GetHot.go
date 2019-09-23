@@ -1,7 +1,7 @@
 package main
 
 import (
-	"../Common"
+	"app/Common"
 	"bytes"
 	"encoding/json"
 	"fmt"

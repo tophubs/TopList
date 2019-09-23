@@ -19,6 +19,10 @@
 -- Table structure for table `hotData2`
 --
 
+CREATE DATABASE IF NOT EXISTS `toplist` CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+USE `toplist`;
+
 DROP TABLE IF EXISTS `hotData2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

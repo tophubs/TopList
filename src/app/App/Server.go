@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"text/template"
 
-	"../Common"
-	"../Config"
+	"app/Common"
+	"app/Config"
 )
 
 func GetTypeInfo(w http.ResponseWriter, r *http.Request) {
@@ -61,20 +61,23 @@ func main() {
 	http.HandleFunc("/GetConfig", GetConfig)     // 设置访问的路由
 
 	// 静态资源
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("../Html/css/"))))
-	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("../Html/js/"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("Html/css/"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("Html/js/"))))
 
 	// 首页
 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		t, err := template.ParseFiles("../Html/hot.html")
+		t, err := template.ParseFiles("Html/hot.html")
 		if err != nil {
 			log.Println("err")
 		}
 		t.Execute(res, nil)
 	})
 
+	fmt.Println("Server Start At :9090")
+
 	err := http.ListenAndServe(":9090", nil) // 设置监听的端口
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
+
 }

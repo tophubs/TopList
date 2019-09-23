@@ -1,0 +1,2 @@
+Source = "root:a1b2c3d4e@tcp(mysql:3306)/toplist?charset=utf8mb4"
+Driver = "mysql"

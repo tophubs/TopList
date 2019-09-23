@@ -1,0 +1,66 @@
+version: '2.0'
+services:
+    server:
+        image: docker.io/library/golang:1.13.0-buster
+        container_name: toplist-server-${DEV_PORT}
+        working_dir: /go/src/app
+        command:
+            - sh
+            - -c
+            - |
+              #使用air做动态代码检查，代码变更后自动重新build并运行
+              #!!!禁止用于生产环境
+              #curl -fLo /usr/local/bin/air https://raw.githubusercontent.com/cosmtrek/air/master/bin/linux/air
+              echo "Asia/Shanghai" >> /etc/timezone
+              cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+              chmod +x /usr/local/bin/air
+              cd /go/src/app
+              air -c /etc/air/air.conf
+        volumes:
+            - ../../src:/go/src/
+            #用于开发环境动态加载代码变更
+            - ./air-server.conf:/etc/air/air.conf
+            - ./air:/usr/local/bin/air
+        links:
+            - mysql:mysql
+        ports:
+            - "${DEV_PORT}:9090"
+    gethot:
+        image: docker.io/library/golang:1.13.0-buster
+        container_name: toplist-gethot-crontab
+        working_dir: /go/src/app
+        command:
+            - sh
+            - -c
+            - |
+              #使用air做动态代码检查，代码变更后自动重新build并运行
+              #!!!禁止用于生产环境
+              #curl -fLo /usr/local/bin/air https://raw.githubusercontent.com/cosmtrek/air/master/bin/linux/air
+              echo "Asia/Shanghai" >> /etc/timezone
+              cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+              chmod +x /usr/local/bin/air
+              cd /go/src/app
+              air -c /etc/air/air.conf
+        volumes:
+            - ../../src:/go/src/
+            #用于开发环境动态加载代码变更
+            - ./air-gethot.conf:/etc/air/air.conf
+            - ./air:/usr/local/bin/air
+        links:
+            - mysql:mysql
+    mysql:
+        image: docker.io/library/mysql:8
+        container_name: toplist-mysql-3306
+        environment:
+            MYSQL_DATABASE: "${MYSQL_DATABASE}"
+            MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+            MYSQL_ROOT_HOST: "${MYSQL_ROOT_HOST}"
+        volumes:
+            - ./_dev/mysql:/var/lib/mysql:z
+            - ../../src/app/Common/database.sql:/docker-entrypoint-initdb.d/database.sql
+        expose:
+            - "3306"
+networks:
+    default:
+        external:
+            name: ${DEV_USER}
