@@ -26,13 +26,6 @@ build-server:
 		-ti docker.io/library/golang:1.13.0-buster \
 		go build -o ./App/Server ./App/Server.go
 
-build-server:
-	docker run --rm \
-		-v $(PWD)/src/app:/go/src/app \
-		-w /go/src/app \
-		-ti docker.io/library/golang:1.13.0-buster \
-		go build -o ./App/Server ./App/Server.go
-
 build-gethot:
 	docker run --rm \
 		-v $(PWD)/src/app:/go/src/app \
