@@ -11,15 +11,15 @@
 1. 将 `/your/path/to/TopList/src` 添加到 $GOPATH，（如果用IDE开发，需要代码提示的话）
 2. `cd {root_path}` # 项目根目录
 3. `cp docker/dev/default.env docker/dev/.env` # 复制docker-compose环境文件
-4. `make dep` # 安装依赖包
+4. `make gomod` 或 `make dep` # 安装依赖包, `make gomod`是使用 `gomodule`, `make dep`是使用 `dep` 工具
 5. `make dev` # 启动。会根据database.sql自动创建数据库，同时使用 [AIR](https://github.com/cosmtrek/air), 不需要重启即可热重载
 6. 等待服务启动完毕，打开`http://{yourdomain}:{DEV_PORT}/` 即可访问今日热榜
 
 ### 编译教程
 ```
 cd {root_path} # 项目根目录
-go build -o ./App/GetHot App/GetHot.go
-go build -o ./App/Server App/Server.go
+make build-server
+make build-gethot
 ```
 
 ### 目录说明

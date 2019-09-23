@@ -2,3 +2,4 @@
 */*/Gopkg.lock
 */*/_dev
 vendor
+*/*/go.sum

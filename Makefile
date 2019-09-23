@@ -19,6 +19,15 @@ dep:
 		-ti docker.io/library/golang:1.13.0-buster \
 		sh -c 'curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh && dep ensure -v'
 
+gomod:
+	docker run --rm \
+		-v $(PWD)/src/app:/go/src/app \
+		-v /tmp/golang-dep:/go/pkg/mod \
+		-w /go/src/app \
+		-e GOPROXY=https://goproxy.cn \
+		-ti docker.io/library/golang:1.13.0-buster \
+		go mod vendor
+
 build-server:
 	docker run --rm \
 		-v $(PWD)/src/app:/go/src/app \
