@@ -1,3 +1,4 @@
 /.idea
 */*/Gopkg.lock
 */*/_dev
+vendor
