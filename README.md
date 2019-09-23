@@ -8,7 +8,7 @@
 
 ### 开发教程
 
-1. 将 `/your/path/to/TopList/src` 添加到 $GOPATH
+1. 将 `/your/path/to/TopList/src` 添加到 $GOPATH，（如果用IDE开发，需要代码提示的话）
 2. `cd {root_path}` # 项目根目录
 3. `cp docker/dev/default.env docker/dev/.env` # 复制docker-compose环境文件
 4. `make dep` # 安装依赖包
