@@ -6,9 +6,8 @@ import (
 	"net/http"
 	"regexp"
 	"text/template"
-
-	"../Common"
-	"../Config"
+	"github.com/tophubs/TopList/Common"
+	"github.com/tophubs/TopList/Config"
 )
 
 func GetTypeInfo(w http.ResponseWriter, r *http.Request) {

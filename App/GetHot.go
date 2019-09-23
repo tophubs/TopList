@@ -1,7 +1,7 @@
 package main
 
 import (
-	"../Common"
+	"github.com/tophubs/TopList/Common"
 	"bytes"
 	"encoding/json"
 	"fmt"
