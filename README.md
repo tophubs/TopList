@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/async-rs/async-std.svg?branch=master)](https://github.com/tophubs/TopList/)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/tophubs/TopList/)
 
-**今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[https://www.printf520.com/hot.html][热榜]**
+**今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[http://tophub.fun][热榜]**
 ![DeepinScrot-4337.png](https://i.loli.net/2019/08/05/PjX2nqWAgM5xsL4.png)
 
 ### 安装教程
