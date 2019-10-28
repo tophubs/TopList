@@ -65,7 +65,7 @@ TopList/
 
 #### 获取所有类型
 - Method: **GET**
-- URL:  ```https://www.printf520.com:8080/GetType```
+- URL:  ```https://www.tophub.fun:8080/GetType```
 - Param：无
 - Body:
 ```
@@ -83,7 +83,7 @@ TopList/
 
 ### 获取具体类型热榜数据
 - Method: **GET**
-- URL:  ```  https://www.printf520.com:8080/GetTypeInfo?id=2```
+- URL:  ```  https://www.tophub.fun:8080/GetAllInfoGzip?id=1```
 - Param：id
 - Body:
 ```
