@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/tophubs/TopList/)
 
 **今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[http://mo.fish][热榜]**
-![mofish.png](http://img.tophub.fun/mofish.png)
+![mofish.png](http://ww1.sinaimg.cn/large/00606sp8ly1gamwewkuiuj31gu0tn0x0.jpg)
 
 ### 安装教程
 
