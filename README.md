@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/tophubs/TopList/)
 
 **今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[http://mo.fish][热榜]**
-![DeepinScrot-4337.png](https://i.loli.net/2019/08/05/PjX2nqWAgM5xsL4.png)
+![DeepinScrot-4337.png](https://img.tophub.fun/QQ%E6%88%AA%E5%9B%BE20200106155418.png)
 
 ### 安装教程
 
@@ -65,7 +65,7 @@ TopList/
 
 #### 获取所有类型
 - Method: **GET**
-- URL:  ```https://www.tophub.fun:8080/GetType```
+- URL:  ```https://www.tophub.fun:8888/GetType```
 - Param：无
 - Body:
 ```
@@ -83,7 +83,7 @@ TopList/
 
 ### 获取具体类型热榜数据
 - Method: **GET**
-- URL:  ```  https://www.tophub.fun:8080/GetAllInfoGzip?id=1```
+- URL:  ```  https://www.tophub.fun:8888/GetAllInfoGzip?id=1```
 - Param：id
 - Body:
 ```
