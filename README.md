@@ -63,7 +63,7 @@ TopList/
 
 #### 获取所有类型
 - Method: **GET**
-- URL:  ```https://www.tophub.fun:8888/GetType```
+- URL:  ```https://www.tophub.fun:8888/GetAllType```
 - Param：无
 - Body:
 ```
@@ -81,33 +81,44 @@ TopList/
 
 ### 获取具体类型热榜数据
 - Method: **GET**
-- URL:  ```  https://www.tophub.fun:8888/GetAllInfoGzip?id=1```
+- URL:  ```  https://www.tophub.fun:8888/v2/GetAllInfoGzip?id=59&page=0```
 - Param：id
 - Body:
 ```
 {
     "Code":0,
-    "Message":"获取成功",
-    "Data":[
-        {
-            "title":"
-45个经典面试回答提示，分享给即将工作的大家。 zt
-",
-            "url":"https://bbs.hupu.com//28814429.html"
-        },
-        {
-            "title":"
-[名场面]回家的诱惑：洪世贤酒店幽会，抵不住诱惑犯了错！ zt
-",
-            "url":"https://bbs.hupu.com//28818367.html"
-        },
-        {
-            "title":"
-张艺兴回应假唱风波。ZT
-",
-            "url":"https://bbs.hupu.com//28815609.html"
-        }
-    ]
+    "Message":"获取数据成功",
+    "Data":{
+        "data":[
+            {
+                "id":1327371,
+                "CreateTime":1579487422,
+                "commentNum":0,
+                "approvalNum":0,
+                "Title":"180W 买了个小破房，月供 7500 多，压力山大",
+                "hotDesc":"200条评论",
+                "Url":"https://www.v2ex.com/t/639366#reply200",
+                "imgUrl":"",
+                "isRss":"",
+                "is_agree":0,
+                "TypeName":"社区"
+            },
+            {
+                "id":1326304,
+                "CreateTime":1579483806,
+                "commentNum":0,
+                "approvalNum":0,
+                "Title":"口罩(N95) 目前应该买哪个? 有研究过得推荐一下?",
+                "hotDesc":"106条评论",
+                "Url":"https://www.v2ex.com/t/639343#reply106",
+                "imgUrl":"",
+                "isRss":"",
+                "is_agree":0,
+                "TypeName":"社区"
+            },
+        ],
+        "page":10
+    }
 }
 ```
 
