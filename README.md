@@ -2,7 +2,7 @@
 
 **今日热榜是一个获取各大热门网站热门头条的聚合网站，使用Go语言编写，多协程异步快速抓取信息，预览:[http://mo.fish][热榜]**
 
-![mofish.png](http://ww1.sinaimg.cn/large/00606sp8ly1gamwewkuiuj31gu0tn0x0.jpg)
+![DeepinScrot-1130.png](http://img.printf520.com/img/DeepinScrot-1130.png)
 
 ### 安装教程
 
