@@ -1370,7 +1370,7 @@ func ExecGetData(spider Spider) {
 	seconds := time.Since(start).Seconds()
 	fmt.Printf("耗费 %.2fs 秒完成抓取%s", seconds, spider.DataType)
 	fmt.Println()
-
+	// test
 }
 
 var group sync.WaitGroup
