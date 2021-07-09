@@ -19,7 +19,7 @@ var (
 	once    sync.Once
 	cfgLock = new(sync.RWMutex)
 )
-
+// 读取配置
 func MySql() *MysqlCfg {
 	once.Do(ReloadConfig)
 	cfgLock.RLock()
@@ -30,7 +30,7 @@ func MySql() *MysqlCfg {
 func GetMySqlFilePath() string {
 	currentPath, err := os.Getwd()
 	if err != nil {
-		log.Fatal("获取目录失败")
+		log.Fatal("获取目录失败!")
 	}
 	if strings.HasSuffix(currentPath, "App") {
 		return strings.ReplaceAll(currentPath, "App", "Config") + "/mysql.toml"
