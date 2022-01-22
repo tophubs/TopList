@@ -20,6 +20,11 @@ import (
 	"time"
 )
 
+var UserAgentMap = map[string]string{
+	"default": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36",
+	"x11":     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+}
+
 type HotData struct {
 	Code    int
 	Message string
@@ -43,6 +48,13 @@ func SaveDataToJson(data interface{}) string {
 
 }
 
+func (spider Spider) getUserAgent(_type string) string {
+	if ua, ok := UserAgentMap[_type]; ok {
+		return ua
+	}
+	return UserAgentMap["default"]
+}
+
 // V2EX
 func (spider Spider) GetV2EX() []map[string]interface{} {
 	url := "https://www.v2ex.com/?tab=hot"
@@ -56,7 +68,7 @@ func (spider Spider) GetV2EX() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	res, err := client.Do(request)
 	if err != nil {
 		fmt.Println("抓取" + spider.DataType + "失败")
@@ -91,7 +103,7 @@ func (spider Spider) GetITHome() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	res, err := client.Do(request)
 	if err != nil {
 		fmt.Println("抓取" + spider.DataType + "失败")
@@ -128,7 +140,7 @@ func (spider Spider) GetZhiHu() []map[string]interface{} {
 		return []map[string]interface{}{}
 	}
 	request.Header.Add("Cookie", `_zap=09ee8132-fd2b-43d3-9562-9d53a41a4ef5; d_c0="AGDv-acVoQ-PTvS01pG8OiR9v_9niR11ukg=|1561288241"; capsion_ticket="2|1:0|10:1561288248|14:capsion_ticket|44:NjE1ZTMxMjcxYjlhNGJkMjk5OGU4NTRlNDdkZTJhNzk=|7aefc35b3dfd27b74a087dd1d15e7a6bb9bf5c6cdbe8471bc20008feb67e7a9f"; z_c0="2|1:0|10:1561288250|4:z_c0|92:Mi4xeGZsekFBQUFBQUFBWU9fNXB4V2hEeVlBQUFCZ0FsVk5PcXo4WFFBNWFFRnhYX2h0ZFZpWTQ5T3dDMGh5ZTV1bjB3|0cee5ae41ff7053a1e39d96df2450077d37cc9924b337584cf006028b0a02f30"; q_c1=ae65e92b2bbf49e58dee5b2b29e1ffb3|1561288383000|1561288383000; tgw_l7_route=f2979fdd289e2265b2f12e4f4a478330; _xsrf=f8139fd6-b026-4f01-b860-fe219aa63543; tst=h; tshl=`)
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 
 	res, err := client.Do(request)
 	if err != nil {
@@ -165,7 +177,7 @@ func (spider Spider) GetWeiBo() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	res, err := client.Do(request)
 
 	if err != nil {
@@ -232,7 +244,7 @@ func (spider Spider) GetDouBan() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Referer", `https://www.douban.com/group/explore`)
 	request.Header.Add("Host", `www.douban.com`)
@@ -274,7 +286,7 @@ func (spider Spider) GetTianYa() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Referer", `http://bbs.tianya.cn/list.jsp?item=funinfo&grade=3&order=1`)
 	request.Header.Add("Host", `bbs.tianya.cn`)
@@ -317,7 +329,7 @@ func (spider Spider) GetHuPu() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Referer", `https://bbs.hupu.com/`)
 	request.Header.Add("Host", `bbs.hupu.com`)
@@ -360,7 +372,7 @@ func (spider Spider) GetGitHub() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	res, err := client.Do(request)
 
 	if err != nil {
@@ -403,7 +415,7 @@ func (spider Spider) GetBaiDu() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("default"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Host", `top.baidu.com`)
 	res, err := client.Do(request)
@@ -444,7 +456,7 @@ func (spider Spider) Get36Kr() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Host", `36kr.com`)
 	request.Header.Add("Referer", `https://36kr.com/`)
@@ -495,7 +507,7 @@ func (spider Spider) GetQDaily() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Host", `www.qdaily.com`)
 	request.Header.Add("Referer", `https://www.qdaily.com/tags/30.html`)
@@ -539,7 +551,7 @@ func (spider Spider) GetGuoKr() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Host", `www.guokr.com`)
 	request.Header.Add("Referer", `https://www.guokr.com/scientific/`)
@@ -583,7 +595,7 @@ func (spider Spider) GetHuXiu() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	request.Header.Add("Host", `www.guokr.com`)
 	request.Header.Add("Referer", `https://www.huxiu.com/channel/107.html`)
@@ -637,7 +649,7 @@ func (spider Spider) GetDBMovie() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -677,7 +689,7 @@ func (spider Spider) GetZHDaily() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -719,7 +731,7 @@ func (spider Spider) GetSegmentfault() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -761,7 +773,7 @@ func (spider Spider) GetHacPai() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -803,7 +815,7 @@ func (spider Spider) GetWYNews() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -847,7 +859,7 @@ func (spider Spider) GetWaterAndWood() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -909,7 +921,7 @@ func (spider Spider) GetNGA() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -953,7 +965,7 @@ func (spider Spider) GetCSDN() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -998,7 +1010,7 @@ func (spider Spider) GetWeiXin() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -1044,7 +1056,7 @@ func (spider Spider) GetKD() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -1090,7 +1102,7 @@ func (spider Spider) GetMop() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -1131,7 +1143,7 @@ func (spider Spider) GetMop() []map[string]interface{} {
 			}
 		}
 	})
-	return allData[:15]
+	return allData
 }
 
 // https://www.chiphell.com/
@@ -1148,7 +1160,7 @@ func (spider Spider) GetChiphell() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 
@@ -1272,7 +1284,7 @@ func (spider Spider) GetJianDan() []map[string]interface{} {
 		fmt.Println("抓取" + spider.DataType + "失败")
 		return []map[string]interface{}{}
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`)
+	request.Header.Add("User-Agent", spider.getUserAgent("x11"))
 	request.Header.Add("Upgrade-Insecure-Requests", `1`)
 	res, err := client.Do(request)
 

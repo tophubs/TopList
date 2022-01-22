@@ -63,7 +63,7 @@ TopList/
 
 #### 获取所有类型
 - Method: **GET**
-- URL:  ```https://www.tophub.fun:8888/GetAllType```
+- URL:  ```https://api.tophub.fun/GetAllType```
 - Param：无
 - Body:
 ```
@@ -81,7 +81,7 @@ TopList/
 
 ### 获取具体类型热榜数据
 - Method: **GET**
-- URL:  ```  https://www.tophub.fun:8888/v2/GetAllInfoGzip?id=59&page=0```
+- URL:  ```  https://api.tophub.fun/v2/GetAllInfoGzip?id=59&page=0```
 - Param：id
 - Body:
 ```
